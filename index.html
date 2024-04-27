@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Libraries-->
+    <!-- download.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.js"
+        integrity="sha512-mxCAjvjp0jvMdGRIEvAHOCGL6BOucqWpTBXwchElsPKNw7BEegHviDHPnYrOrzgzBiw3GD/Q1ibpA5nlFPYDMw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./img/P.png">
+
+</head>
+
+<body>
+
+    <!-- Draw text here -->
+    <canvas id="canvas" width="1800" height="600"
+        style="border: solid black 1px; margin: 10px; border-radius: 3px;"></canvas>
+
+    <!-- Grid -->
+    <div class="parent">
+
+        <!-- Top and Bottom text -->
+        <input class="topTextbox" type="text" id="inputTop" placeholder="Top text" size="50px">
+        <input class="bottomTextbox" type="text" id="inputBottom" placeholder="Bottom text" size="50px">
+
+        <!-- Speed and Color-->
+        <div class="attributesTextbox">
+            <input type="text" id="speed" placeholder="Speed (in milliseconds)" size="25px">
+            <input type="color" id="color" value="#ffffff">
+        </div>
+
+        <!-- Background -->
+        <button class="file" id="inputFile" onclick="showBGS()">Add background</button>
+
+        <!-- Output buttons -->
+        <button class="previewBtn" onclick="animation(color, speed, img)">Preview</button>
+        <button class="exportBtn" onclick="exportText(color, speed, img)">Export</button>
+
+    </div>
+
+    <!-- GitHub repo -->
+    <img src="./img/github.png" alt="GitHub" title="Star the repo if you can, it helps!" width="64" class="git">
+
+    <div class="modal" id="modal">
+        <div class="bgs">
+            <img width="400" onclick="updateBG(this)" alt="1-1 HEART OF THE SUNRISE" src="./img/backgrounds/1-1.jpg">
+            <img width="400" onclick="updateBG(this)" alt="1-4 CLAIR DE LUNE (arena)" src="./img/backgrounds/1-4.jpg">
+            <img width="400" onclick="updateBG(this)" alt="1-4 CLAIR DE LUNE (staircases)"
+                src="./img/backgrounds/1-4 (2).jpg">
+            <img width="400" onclick="updateBG(this)" alt="1-4 CLAIR DE LUNE (skulls entrance)"
+                src="./img/backgrounds/1-4 (3).jpg">
+            <img width="400" onclick="updateBG(this)" alt="4-2 GOD DAMN THE SUN" src="./img/backgrounds/4-2.jpg">
+            <img width="400" onclick="updateBG(this)" alt="5-1 IN THE WAKE OF POSEIDON" src="./img/backgrounds/5-1.jpg">
+            <img width="400" onclick="updateBG(this)" alt="6-2 AESTHETICS OF HATE (entrance)"
+                src="./img/backgrounds/6-2.jpg">
+            <img width="400" onclick="updateBG(this)" alt="6-2 AESTHETICS OF HATE (arena)"
+                src="./img/backgrounds/6.2 (2).jpg">
+            <img width="400" onclick="updateBG(this)" alt="6-2 AESTHETICS OF HATE (Gabriel)"
+                src="./img/backgrounds/6-2 (3).jpg">
+            <img width="400" onclick="updateBG(this)" alt="7-1 GARDEN OF FORKING PATHS" src="./img/backgrounds/7-1.jpg">
+            <img width="400" onclick="updateBG(this)" alt="7-2 LIGHT UP THE NIGHT" src="./img/backgrounds/7-2.jpg">
+            <img width="400" onclick="updateBG(this)" alt="7-4 ...LIKE ANTENNAS TO HEAVEN"
+                src="./img/backgrounds/7-4.jpg">
+
+            <p style="color: black;">For correct results, be sure your background is 1800x600 pixels</p>
+            <input type="file" id="inputBG" onchange="customBG(this.files[0]);">
+        </div>
+
+    </div>
+
+</body>
+
+<!-- Scripts -->
+<script src="./js/main.js"></script>
+<script src="./js/title.js"></script>
+<script src="./js/bg.js"></script>
+
+<!-- Get and update attributes -->
+<script>
+
+    let color; let speed;
+
+    let c = document.getElementById('canvas')
+    let context = c.getContext('2d')
+    let img = new Image()
+
+    function updateBG(bg) {
+        img.src = bg.src
+        context.drawImage(img, 0, 0)
+    }
+
+    function customBG(bg) {
+        img.src = URL.createObjectURL(bg)
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, 0, 0)
+    }
+
+    setInterval(() => {
+        color = document.getElementById('color').value
+        speed = document.getElementById('speed').value
+    }, 10);
+
+</script>
+
+</html>
