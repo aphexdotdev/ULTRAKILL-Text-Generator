@@ -83,20 +83,21 @@ function animation(color, interval, background) {
     let currentTopLetter = 0;
     let currentBottomLetter = 0;
 
+    // Sizes and heights
+    let topSize = 65
+    const topHeight = 3
+
+    let bottomSize = 80
+    let bottomHeight = 2
+
     // Draw letters procedurally
     function drawLetters(position) {
-
-        // Sizes and heights
-        const topSize = '45px'
-        const topHeight = 3
-
-        const bottomSize = '60px'
-        const bottomHeight = 2.3
 
         // Draw
         if (position === 'top') {
 
             temp.push(topText[currentTopLetter])
+            let topTextWidth = ctx.measureText(topText[currentTopLetter]).width;
 
             // Clear canvas and draw background
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -105,7 +106,12 @@ function animation(color, interval, background) {
             // Text style
             ctx.fillStyle = `${color}`
             ctx.textAlign = 'center'
-            ctx.font = `bold ${topSize} ULTRAKILL`;
+            
+            // Decrease size if text gets drawn off screen
+            if (topTextWidth > canvas.width) {
+                topSize -= 5 
+            }
+            ctx.font = `bold ${topSize}px ULTRAKILL`;
 
             // The hedgehog
             ctx.shadowOffsetX = 2;
@@ -117,20 +123,28 @@ function animation(color, interval, background) {
 
         } else {
 
+            let bottomTextWidth = ctx.measureText(bottomText[currentBottomLetter]).width;
+
             // Clear canvas and draw background
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(background, -0, -0)
 
             // Draw final stage of old top text
             if (isTopEmpty == false) {
-                ctx.font = `bold ${topSize} ULTRAKILL`;
+                ctx.font = `bold ${topSize}px ULTRAKILL`;
                 ctx.fillText(temp[temp.length - 1], canvas.width / 2, canvas.height / topHeight)
             }
 
             // Text style
             ctx.fillStyle = `${color}`
             ctx.textAlign = 'center'
-            ctx.font = `bold ${bottomSize} ULTRAKILL`;
+
+            // Decrease size if text gets drawn off screen
+            if (bottomTextWidth > canvas.width) {
+                bottomSize -= 10
+                bottomHeight += 0.1
+            }
+            ctx.font = `bold ${bottomSize}px ULTRAKILL`;
 
             // The hedgehog
             ctx.shadowOffsetX = 2;
