@@ -18,36 +18,32 @@
 </head>
 
 <body>
+    <!-- Background fixed div -->
+    <div id="siteBack"></div>
 
     <!-- Draw text here -->
-    <canvas id="canvas" width="1800" height="600"
-        style="border: solid black 1px; margin: 10px; border-radius: 3px;"></canvas>
+    <canvas id="canvas"></canvas>
 
     <!-- Grid -->
     <div class="parent">
-
-        <!-- Top and Bottom text -->
-        <input class="topTextbox" type="text" id="inputTop" placeholder="Top text" size="50px">
-        <input class="bottomTextbox" type="text" id="inputBottom" placeholder="Bottom text" size="50px">
-
-        <!-- Speed and Color-->
-        <div class="attributesTextbox">
-            <input type="text" id="speed" placeholder="Speed (in milliseconds)" size="25px">
-            <input type="color" id="color" value="#ffffff">
+        <div class="inputFileWrapper">
+            <button class="file" id="inputFile" onclick="showBGS()">Background</button>
+            <button class="previewBtn" onclick="animation(color, speed, img)">Preview</button>
+            <button class="exportBtn" onclick="exportText(color, speed, img)">Export</button>
         </div>
-
-        <!-- Background -->
-        <button class="file" id="inputFile" onclick="showBGS()">Add background</button>
-
-        <!-- Output buttons -->
-        <button class="previewBtn" onclick="animation(color, speed, img)">Preview</button>
-        <button class="exportBtn" onclick="exportText(color, speed, img)">Export</button>
-
+        <div class="inputTextWrapper">
+            <input class="topTextbox" type="text" id="inputTop" placeholder="Top text">
+            <input class="bottomTextbox" type="text" id="inputBottom" placeholder="Bottom text">
+            <div class="attributesTextbox">
+                <input type="text" id="speed" placeholder="Speed (ms)">
+                <input type="color" id="color" value="#ffffff">
+            </div>
+        </div>
     </div>
 
     <!-- GitHub repo -->
     <a href="https://github.com/clairedotpng/ULTRAKILL-Text-Generator">
-        <img src="./img/github.png" alt="GitHub" title="Star the repo if you can, it helps!" width="64" class="git">
+        <img src="./img/github.png" alt="GitHub" title="Star the repo if you can, it helps!" class="git">
     </a>
 
     <div class="modal" id="modal">
@@ -93,15 +89,18 @@
     let context = c.getContext('2d')
     let img = new Image()
 
+    c.width = Math.round(c.clientWidth);
+    c.height = Math.round(c.clientHeight);
+
     function updateBG(bg) {
         img.src = bg.src
-        context.drawImage(img, 0, 0)
+        context.drawImage(img, 0, 0, c.width, c.height)
     }
 
     function customBG(bg) {
         img.src = URL.createObjectURL(bg)
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(img, 0, 0)
+        ctx.clearRect(0, 0, c.width, c.height);
+        context.drawImage(img, 0, 0, c.width, c.height)
     }
 
     setInterval(() => {

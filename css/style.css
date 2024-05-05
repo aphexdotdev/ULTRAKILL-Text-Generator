@@ -12,14 +12,26 @@
     --textbox: #2b2a33;
 }
 
+html {
+    height: 100vh;
+}
+
 body {
     font-family: 'ULTRAKILL';
     font-size: 20px;
     color: aliceblue;
+    text-align: center;
+    height: calc(100vh - 16px);
+}
+
+#siteBack {
+    position: fixed;
+    inset: 0;
     background-image: url('../img/bg.png');
     background-size: cover;
     background-repeat: no-repeat;
-    text-align: center;
+    background-position: center;
+    z-index: -9999;
 }
 
 button {
@@ -43,6 +55,16 @@ button:hover {
     filter: brightness(70%);
 }
 
+canvas {
+    width: calc(100vw - 2px - 20px - 16px); 
+    max-width: 1800px;
+    aspect-ratio: 1800 / 600;
+    border: solid black 1px; 
+    margin: 10px; 
+    border-radius: 3px; 
+    background-color: black;
+}
+
 /* File input */
 #inputFile {
     width: 230px;
@@ -50,36 +72,51 @@ button:hover {
 
 /* Grid */
 .parent {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    height: 260px;
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    row-gap: 10px;
+    column-gap: 20px;
+    width: calc(100% - 6rem);
+    max-width: 950px;
 }
 
-.topTextbox {
-    grid-area: 1 / 4 / 2 / 5;
+.inputFileWrapper {
+    flex: 0 1 0
 }
 
-.bottomTextbox {
-    grid-area: 2 / 4 / 3 / 5;
+.inputFileWrapper > button {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.inputTextWrapper {
+    flex: 1 1 0
+}
+
+.inputTextWrapper > input {
+    margin-top: 6.5px;
+    margin-bottom: 16.5px;
+    width: calc(100% - 14px);
+}
+
+.controlBtnWrapper {
+    flex: 0 1 0;
+}
+
+.controlBtnWrapper > button {
+    margin-bottom: 10px;
 }
 
 .attributesTextbox {
-    grid-area: 3 / 4 / 4 / 5;
-}
-
-.exportBtn {
-    grid-area: 2 / 5 / 4 / 6;
-}
-
-.previewBtn {
-    grid-area: 1 / 5 / 3 / 6;
-}
-
-.file {
-    grid-area: 1 / 3 / 2 / 4;
+    padding-top: 6.5px;
+    margin-bottom: 16.5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 /* Text fields */
@@ -93,11 +130,12 @@ input {
     outline: none;
     border-bottom: .2em solid var(--primary);
     border-radius: .2em .2em 0 0;
-    padding: .4em;
+    padding: 7px;
     color: white;
     background-color: var(--textbox);
     font-family: 'ULTRAKILL';
     font-size: 18px;
+    min-width: 0;
 }
 
 img {
@@ -144,12 +182,17 @@ img:hover {
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
     animation-name: slideIn;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
+    overflow-y:scroll;
 }
 
 /* GitHub logo */
 .git {
-    float: right;
+    position: absolute;
+    width: 2.5rem;
+    top: 100%;
+    transform: translateY(calc(-100% - 10px));
+    right: 10px;
 }
 
 /* Add Animation */
@@ -194,5 +237,19 @@ img:hover {
 
     to {
         opacity: 1
+    }
+}
+
+@media screen and (width <= 815px) {
+    .parent {
+        width: calc(100% - 20px);
+    }
+    
+    #inputFile,
+    button {
+        width: 100%;
+    }
+    * {
+        font-size: 1rem !important;
     }
 }
