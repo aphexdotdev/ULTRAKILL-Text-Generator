@@ -2,6 +2,9 @@
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
+canvas.width = Math.max(1800, canvas.clientWidth);
+canvas.height = Math.max(600, canvas.clientHeight);
+
 // Setup recorder
 const stream = canvas.captureStream();
 const recorder = new MediaRecorder(stream);
@@ -24,7 +27,7 @@ function exportText(color, interval, bg) {
 
     // Start drawing
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(bg, 0, 0)
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height)
     animation(color, interval, bg)
 
     // Export
@@ -84,10 +87,10 @@ function animation(color, interval, background) {
     let currentBottomLetter = 0;
 
     // Sizes and heights
-    let topSize = 65
+    let topSize = canvas.height / 9.25;
     const topHeight = 3
 
-    let bottomSize = 80
+    let bottomSize = canvas.height / 7.5
     let bottomHeight = 2
 
     // Draw letters procedurally
@@ -101,15 +104,17 @@ function animation(color, interval, background) {
 
             // Clear canvas and draw background
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(background, 0, 0)
+            ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
 
             // Text style
             ctx.fillStyle = `${color}`
             ctx.textAlign = 'center'
             
             // Decrease size if text gets drawn off screen
-            if (topTextWidth > canvas.width) {
-                topSize -= 5 
+            while (topTextWidth > canvas.width) {
+                topSize--;
+                ctx.font = `bold ${topSize}px ULTRAKILL`;
+                topTextWidth = ctx.measureText(topText[currentTopLetter]).width
             }
             ctx.font = `bold ${topSize}px ULTRAKILL`;
 
@@ -127,7 +132,7 @@ function animation(color, interval, background) {
 
             // Clear canvas and draw background
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(background, -0, -0)
+            ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
 
             // Draw final stage of old top text
             if (isTopEmpty == false) {
@@ -140,9 +145,10 @@ function animation(color, interval, background) {
             ctx.textAlign = 'center'
 
             // Decrease size if text gets drawn off screen
-            if (bottomTextWidth > canvas.width) {
-                bottomSize -= 10
-                bottomHeight += 0.1
+            while (bottomTextWidth > canvas.width) {
+                bottomSize --
+                ctx.font = `bold ${bottomSize}px ULTRAKILL`;
+                bottomTextWidth = ctx.measureText(bottomText[currentBottomLetter]).width;
             }
             ctx.font = `bold ${bottomSize}px ULTRAKILL`;
 

@@ -13,3 +13,9 @@ window.onclick = function (event) {
         modal.style.display = 'none';
     }
 }
+
+window.onkeydown = (e) => {
+    if (e.keyCode == 27) {
+        modal.style.display = 'none';
+    }
+}
