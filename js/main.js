@@ -109,7 +109,7 @@ function animation(color, interval, background) {
             // Text style
             ctx.fillStyle = `${color}`
             ctx.textAlign = 'center'
-            
+
             // Decrease size if text gets drawn off screen
             while (topTextWidth > canvas.width) {
                 topSize--;
@@ -146,7 +146,7 @@ function animation(color, interval, background) {
 
             // Decrease size if text gets drawn off screen
             while (bottomTextWidth > canvas.width) {
-                bottomSize --
+                bottomSize--
                 ctx.font = `bold ${bottomSize}px ULTRAKILL`;
                 bottomTextWidth = ctx.measureText(bottomText[currentBottomLetter]).width;
             }
