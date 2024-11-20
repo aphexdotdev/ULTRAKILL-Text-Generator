@@ -17,12 +17,4 @@ Further more, you can use a custom color or background (resize it to 1800x600p f
 
 ![](https://github.com/clairedotpng/ULTRAKILL-Text-Generator/blob/main/img/readme/showcase%20colors%20n%20bg.gif?raw=true)
 
-Sadly transparency is impossible with the MediaRecorder API to the extent of my knowledge.
-This is my first GitHub repository so I don't know what else to add, have a good one.
-
-```diff
--GITHUB IS THRIVING
--STARS ARE FUEL
--REPO IS EMPTY
-```
-(Please star it helps)
+Sadly transparency is impossible with the MediaRecorder API to the extent of my knowledge
